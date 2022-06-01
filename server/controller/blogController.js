@@ -12,12 +12,25 @@ exports.create = (req, res) => {
       return res.status(400).json({ error: "กรุณาป้อนเนื้อหาบทความ" });
       break;
   }
-  //บันทึกข้่อมูล
-
   Blogs.create({ title, content, author, slug }, (err, blog) => {
     if (err) {
       res.status(400).json({ error: err });
     }
+    res.json(blog);
+  });
+};
+
+// แสดงข้อมูลจาก DATABAST
+exports.getAllblogs = (req, res) => {
+  Blogs.find({}).exec((err, blogs) => {
+    res.json(blogs);
+  });
+};
+
+// Select blog
+exports.singleBlog = (req, res) => {
+  const { slug } = req.params;
+  Blogs.findOne({ slug }).exec((err, blog) => {
     res.json(blog);
   });
 };
