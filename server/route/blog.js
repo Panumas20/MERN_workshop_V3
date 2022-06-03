@@ -5,6 +5,7 @@ const {
   create,
   getAllblogs,
   singleBlog,
+  remove,
 } = require("../controller/blogController");
 
 router.get("/", (req, res) => {
@@ -16,5 +17,6 @@ router.get("/", (req, res) => {
 router.get("/blogs", getAllblogs);
 router.post("/create", create);
 router.get("/blog/:slug", singleBlog);
+router.delete("/blog/:slug", remove);
 
 module.exports = router;
